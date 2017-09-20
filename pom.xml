@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.com.users</groupId>
+	<artifactId>users</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>users</name>
+	<description>Users API Project</description>
+
+	<modules>
+		<module>users-model</module>
+		<module>users-core</module>
+		<module>users-business</module>
+		<module>users-api</module>
+	</modules>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.4.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.encoding>UTF-8</project.encoding>
+		<java.version>1.8</java.version>
+
+		<modules.groupid>br.com.users</modules.groupid>
+		<users.version>1.0-SNAPSHOT</users.version>
+		<users-model.version>1.0-SNAPSHOT</users-model.version>
+		<users-core.version>1.0-SNAPSHOT</users-core.version>
+
+		<slf4j.api.version>1.7.21</slf4j.api.version>
+		<slf4j.simple.version>1.7.12</slf4j.simple.version>
+		<hsqldb.version>1.8.0.10</hsqldb.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.simple.version}</version>
+			</dependency>
+<!-- 			<dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>3.8.1</version>
+	            <scope>test</scope>
+			</dependency> -->
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.encoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
