@@ -3,8 +3,6 @@
  */
 package br.com.users.business.facade.impl;
 
-import java.br.com.users.core.repository.UserRepository;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import br.com.users.business.dto.mapper.UserMapper;
 import br.com.users.business.error.EntityNotFoundException;
 import br.com.users.business.error.ExistingEntityException;
 import br.com.users.business.facade.UserFacadeable;
+import br.com.users.core.repository.UserRepository;
 import br.com.users.model.User;
 
 /**
