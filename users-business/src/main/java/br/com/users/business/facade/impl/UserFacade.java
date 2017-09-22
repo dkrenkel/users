@@ -3,10 +3,13 @@
  */
 package br.com.users.business.facade.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.users.business.dto.UserDTO;
 import br.com.users.business.dto.mapper.UserMapper;
@@ -30,25 +33,40 @@ public class UserFacade implements UserFacadeable {
 	private UserMapper userMapper;
 
 	@Override
-	public void saveUser(UserDTO userDTO) {
+	public void saveUser(UserDTO userDTO) throws ExistingEntityException {
 		User user = this.userRepository.findByCpf(userDTO.getCpf());
 		if (user != null) {
 			throw new ExistingEntityException("Entity already exists");
 		}
 		this.userRepository.save(this.userMapper.map(userDTO));
 	}
+	
+	@Override
+	@Transactional
+	public void saveUsers(List<UserDTO> usersDTO) throws ExistingEntityException {
+		for (UserDTO userDTO: usersDTO) {
+			User user = this.userRepository.findByCpf(userDTO.getCpf());
+			if (user != null) {
+				throw new ExistingEntityException("Entity already exists");
+			}
+			this.userRepository.save(this.userMapper.map(userDTO));
+		}
+	}
 
 	@Override
-	public void updateUser(UserDTO userDTO) {
+	public void updateUser(UserDTO userDTO) throws EntityNotFoundException {
 		User user = this.userRepository.findByCpf(userDTO.getCpf());
 		if (user == null) {
 			throw new EntityNotFoundException("Entity not found");
 		}
-		this.userRepository.save(this.userMapper.map(userDTO));
+		Long id = user.getId();
+		user = this.userMapper.map(userDTO);
+		user.setId(id);
+		this.userRepository.save(user);
 	}
 
 	@Override
-	public void deleteUser(String cpf) {
+	public void deleteUser(String cpf) throws EntityNotFoundException {
 		User user = this.userRepository.findByCpf(cpf);
 		if (user == null) {
 			throw new EntityNotFoundException("Entity not found");
@@ -57,7 +75,12 @@ public class UserFacade implements UserFacadeable {
 	}
 
 	@Override
-	public UserDTO findByCpf(String cpf) {
+	public UserDTO findByCpf(String cpf) throws EntityNotFoundException {
+		User user = this.userRepository.findByCpf(cpf);
+		if (user == null) {
+			throw new EntityNotFoundException("Entity not foud");
+		}
 		return this.userMapper.map(this.userRepository.findByCpf(cpf));
 	}
+
 }

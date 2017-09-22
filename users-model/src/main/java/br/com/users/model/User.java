@@ -28,7 +28,7 @@ public class User implements BaseEntity<Long> {
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
-	@Column(name = "cpf", nullable = false, length = 11, columnDefinition = "CHAR(11)")
+	@Column(name = "cpf", nullable = false, length = 11, columnDefinition = "CHAR(11)", unique = true)
 	private String cpf;
 
 	@Column(name = "email", nullable = false, length = 50)

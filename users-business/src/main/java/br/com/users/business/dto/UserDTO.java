@@ -3,11 +3,15 @@
  */
 package br.com.users.business.dto;
 
+import java.io.Serializable;
+
 /**
  * @author David Krenkel <david.melo1992@gmail.com>
  *
  */
-public class UserDTO {
+public class UserDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String name;
 	

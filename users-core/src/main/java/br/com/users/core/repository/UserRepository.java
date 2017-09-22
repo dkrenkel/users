@@ -13,6 +13,11 @@ import br.com.users.model.User;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	/**
+	 * Searches for a user with the given cpf
+	 * @param cpf
+	 * @return The found user
+	 */
 	User findByCpf(String cpf);
 	
 }

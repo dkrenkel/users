@@ -7,7 +7,7 @@ package br.com.users.business.error;
  * @author David Krenkel <david.melo1992@gmail.com>
  *
  */
-public class EntityNotFoundException extends RuntimeException {
+public class EntityNotFoundException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 	
